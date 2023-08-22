@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     compileOnly("io.micronaut.data:micronaut-data-processor")
+    implementation("org.apache.groovy:groovy:4.0.14")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.groovy:micronaut-runtime-groovy")
@@ -26,7 +27,7 @@ dependencies {
     compileOnly("io.micronaut.validation:micronaut-validation-processor")
     runtimeOnly("com.h2database:h2")
     testImplementation("io.micronaut:micronaut-http-client")
-    testImplementation("org.apache.groovy:groovy-ginq")
+    testImplementation("org.apache.groovy:groovy-ginq:4.0.14")
 }
 
 application {

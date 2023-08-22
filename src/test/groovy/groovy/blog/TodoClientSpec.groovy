@@ -25,10 +25,10 @@ class TodoClientSpec extends Specification {
             from todo in client.list()
             groupby todo.due
             orderby todo.due
-            select todo.due, agg(_g.stream().map(r -> r.todo.title).sorted().toList()) as todos_due
+            select todo.due, list(todo.title).toSorted()
         }.toString() == '''
         +------------+------------------------------------------------------------------------+
-        | due        | todos_due                                                              |
+        | due        | this.list(todo.title).toSorted()                                       |
         +------------+------------------------------------------------------------------------+
         | 2023-09-01 | [Create Todo class, Create TodoKey class, Create TodoStats class]      |
         | 2023-09-02 | [Create repo classes, Create test classes, Declarative client example] |

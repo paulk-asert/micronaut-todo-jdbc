@@ -1,8 +1,10 @@
 package groovy.blog
 
+import groovy.transform.CompileStatic
 import jakarta.inject.Inject
 import java.time.LocalDate
 
+@CompileStatic
 class TodoService {
     @Inject TodoRepository repo
 
@@ -21,8 +23,8 @@ class TodoService {
     TodoStats stats() {
         List<Todo> all = repo.findAll()
         int total = all.size()
-        int completed = all.count(t -> t.done)
-        int totalScheduled = all.count(t -> t.scheduled)
+        int completed = all.count(0,t -> t.done)
+        int totalScheduled = all.count(0, t -> t.scheduled)
         int completedOnSchedule = repo.findCompletedOnSchedule().size()
         new TodoStats(total, completed, totalScheduled, completedOnSchedule)
     }

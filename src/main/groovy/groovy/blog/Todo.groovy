@@ -1,6 +1,7 @@
 package groovy.blog
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import io.micronaut.core.annotation.NonNull
@@ -10,12 +11,12 @@ import io.micronaut.serde.annotation.Serdeable
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.validation.constraints.NotBlank
-
 import java.time.LocalDate
 
 @MappedEntity
 @EqualsAndHashCode(excludes = 'id')
 @Serdeable
+@CompileStatic
 @ToString(excludes = 'id', includeNames = true, ignoreNulls = true)
 @JsonIgnoreProperties(['id', 'done', 'scheduled'])
 class Todo {
