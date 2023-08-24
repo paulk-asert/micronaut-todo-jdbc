@@ -11,10 +11,7 @@ import java.time.LocalDate
 @Canonical
 @CompileStatic
 class TodoKey {
-    @NonNull
-    @NotBlank
-    String title
+    @NotBlank String title
 
-    @Nullable
-    LocalDate due = null
+    @Nullable LocalDate due = null
 }

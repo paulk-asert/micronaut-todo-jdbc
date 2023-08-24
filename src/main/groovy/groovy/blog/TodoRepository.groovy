@@ -15,7 +15,7 @@ import java.time.LocalDate
 @JdbcRepository(dialect = Dialect.H2)
 abstract class TodoRepository implements CrudRepository<@Valid Todo, @NotNull Long> {
 
-    abstract Todo findByTitleAndDueOrDueIsNull(@NotNull @NotBlank String title, @Nullable LocalDate due)
+    abstract Todo findByTitleAndDueOrDueIsNull(@NotBlank String title, @Nullable LocalDate due)
 
     @Query('SELECT * FROM todo WHERE completed <= due')
     abstract List<Todo> findCompletedOnSchedule()

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
-import io.micronaut.core.annotation.NonNull
 import io.micronaut.core.annotation.Nullable
 import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.serde.annotation.Serdeable
@@ -21,12 +20,12 @@ import java.time.LocalDate
 @JsonIgnoreProperties(['id', 'done', 'scheduled'])
 class Todo {
     @GeneratedValue @Id Long id
-    @NonNull @NotBlank final String title
+    @NotBlank final String title
     @Nullable final String description
     @Nullable LocalDate due = null
     @Nullable LocalDate completed
 
-    Todo(@NonNull @NotBlank String title, @Nullable String description,
+    Todo(@NotBlank String title, @Nullable String description,
          @Nullable LocalDate due, @Nullable LocalDate completed) {
         this.title = title
         this.description = description

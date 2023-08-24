@@ -3,6 +3,8 @@ package groovy.blog
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import jakarta.validation.ConstraintViolationException
+import jakarta.validation.Validator
+
 import java.time.LocalDate
 import spock.lang.Specification
 
@@ -11,6 +13,7 @@ class TodoValidationSpec extends Specification {
 
     @Inject TodoRepository repo
     @Inject TodoService service
+    @Inject Validator validator
     private static final LocalDate ANY_DATE = LocalDate.now()
     private static final String ANY_DESC = 'Some description'
 
@@ -56,5 +59,26 @@ class TodoValidationSpec extends Specification {
         service.find(new TodoKey('', ANY_DATE))
         then:
         thrown(ConstraintViolationException)
+    }
+    void 'title must not be blank or null for Todo or TodoKey'() {
+        when:
+        var todo = new Todo(null, ANY_DESC, ANY_DATE, ANY_DATE)
+        then:
+        validator.validate(todo)
+
+        when:
+        todo = new Todo('', ANY_DESC, ANY_DATE, ANY_DATE)
+        then:
+        validator.validate(todo)
+
+        when:
+        todo = new TodoKey(null, ANY_DATE)
+        then:
+        validator.validate(todo)
+
+        when:
+        todo = new TodoKey('', ANY_DATE)
+        then:
+        validator.validate(todo)
     }
 }
